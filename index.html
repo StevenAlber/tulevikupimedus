@@ -145,6 +145,7 @@
     letter-spacing:-.02em;
     margin:0 0 2.4rem;
     color:var(--bone);
+    overflow-wrap:break-word;
   }
   .hero__diag{
     font-family:"Fraunces",serif;
@@ -155,6 +156,12 @@
     color:var(--bone-dim);
     max-width:24ch;
     margin:0;
+  }
+  .hero__sign{
+    margin-top:1.4rem;
+    font-family:"JetBrains Mono",monospace;
+    font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(236,226,211,.48);
   }
   .hero__cue{
     margin-top:7vh;
@@ -387,28 +394,29 @@
   <header class="hero">
     <div class="hero__mark" aria-hidden="true">卜</div>
     <p class="eyebrow eyebrow--ember">Tulevikupimedus</p>
-    <h1>Tuleviku&shy;pimedus</h1>
+    <h1>Tuleviku<wbr>pimedus</h1>
     <p class="hero__diag">Pimedaks ei jää see, kes ei näe. Pimedaks jääb see, kes usub, et ta näeb.</p>
+    <p class="hero__sign">Steven Alber · 2026</p>
     <div class="hero__cue" aria-hidden="true">Loe pragu</div>
   </header>
 
   <!-- I. DIAGNOOS -->
   <section class="block reveal">
     <p class="eyebrow">I — Diagnoos</p>
-    <p class="lead">On olemas pimedus, millel pole sümptomit.</p>
-    <p class="dim">Taju ei kao. Silm näeb edasi, mõistus arutleb edasi, inimene kõnnib mööda maailma ega koperda. Just seetõttu on see pimedus täielik: ta ei jäta endast märki. Pime, kes teab oma pimedusest, sirutab käe ette. Pime, kes usub, et näeb, kõnnib otse seina.</p>
-    <p class="dim">Lääs usub, et ta näeb tulevikku. Tal on mudelid, prognoosid, stsenaariumid. Ta on ehitanud masinad, mis arvutavad ette ilma, turud, valimised, sõjad. Ja kui talle näidata midagi, mis loeb tulevikku teisiti — sünnitundi, joonte mustrit, iidset märki —, siis ta naerab. „Ebausk," ütleb ta. „Keskaeg."</p>
+    <p class="lead">On olemas pimedus, millel pole sümptomeid.</p>
+    <p class="dim">Taju ei kao. Silm näeb edasi, mõistus arutleb edasi, inimene kõnnib mööda maailma ega koperda. Just seetõttu on see pimedus täielik: ta ei jäta endast märki. Pime, kes teab oma pimedusest, sirutab käe ette. Pime, kes usub, et näeb, kõnnib otse vastu seina.</p>
+    <p class="dim">Lääs usub, et ta näeb tulevikku. Tal on mudelid, prognoosid ja stsenaariumid. Ta on ehitanud masinad, mis arvutavad ette ilma, turge, valimisi ja sõdu. Ja kui talle näidata midagi, mis loeb tulevikku teisiti — sünnitundi, joonte mustrit, iidset märki —, siis ta naerab. „Ebausk," ütleb ta. „Keskaeg."</p>
     <p class="hammer">See naer on pimeda samm seina poole.</p>
     <p class="dim">Ja siin ei ole enam vahet, kas inimene on professor, ametnik, ajakirjanik või tavaline targutaja. Kui ta loeb ainult uudist, aga ei loe märki, on ta pime.</p>
-    <p class="dim">Sest seal, kus Lääs naerab, on Hiina ehitanud tuhandeid aastaid kestnud tuleviku lugemise tsivilisatsiooni. Mitte vaikselt. Mitte peidus. Avalikult, kivisse ja luusse raiutuna — ja Lääs vaatas seda otse, nimetas ebausuks ning ei märganud, et ta seisab juba selle sees.</p>
-    <p class="lead">See on tulevikupimedus. Mitte teadmatus. Halvem. <strong>Veendumus, et tead.</strong></p>
+    <p class="dim">Sest seal, kus Lääs naerab, on Hiina ehitanud tuhandeid aastaid kestnud tuleviku lugemise tsivilisatsiooni. Mitte vaikselt. Mitte peidus. Avalikult, kivisse ja luusse raiutuna — ja Lääs vaatas seda otse, nimetas seda ebausuks ning ei märganud, et seisab juba selle sees.</p>
+    <p class="lead">See on tulevikupimedus. Mitte teadmatus. Midagi hullemat: <strong>veendumus, et tead.</strong></p>
   </section>
 
   <!-- II. KOLM ASJA -->
   <section class="block reveal">
     <p class="eyebrow">II — Kolm asja, mida sulle ei õpetatud</p>
-    <p class="dim">Ma ei jõudnud selle mõtteni raamatukogus. See hakkas mulle sisse tulema alles siis, kui nägin, kuidas vana Hiina märgikeel ja uus masinatsivilisatsioon seisavad kõrvuti — ega vaidle omavahel üldse. Vaid Lääs naerab. Ja just see naer reetis pimeduse.</p>
-    <p class="lead">Legend, mida ma sulle räägin, ei ole väljamõeldis. Igaüks võib selle üle kontrollida. Just see teeb ta talumatuks.</p>
+    <p class="dim">Ma ei jõudnud selle mõtteni raamatukogus. See hakkas mulle sisse tulema alles siis, kui nägin, kuidas vana Hiina märgikeel ja uus masinatsivilisatsioon seisavad kõrvuti — ega vaidle omavahel üldse. Ainult Lääs naerab. Ja just see naer reetis pimeduse.</p>
+    <p class="lead">Legend, mida ma sulle räägin, ei ole väljamõeldis. Igaüks võib selle üle kontrollida. Just see teebki selle talumatuks.</p>
 
     <div class="pillars">
       <article class="pillar">
@@ -416,7 +424,7 @@
         <div>
           <span class="pillar__n">Esimene</span>
           <h3>Hiina vanim säilinud kiri oli küsimus tulevikule.</h3>
-          <p>Vanim säilinud hiina kiri ei räägi kaubandusest ega seadusest. Ta on ennustus. Kolm tuhat aastat tagasi raiuti Shangi dünastia oraakliluudele — kilpkonna kõhukilbile, härja abaluule — küsimus. Luu kuumutati tulel, kuni ta pragunes, ja pragu loeti vastuseks.</p>
+          <p>Vanim säilinud hiina kiri ei räägi kaubandusest ega seadusest. See on ennustus. Kolm tuhat aastat tagasi raiuti Shangi dünastia oraakliluudele — kilpkonna kõhukilbile, härja abaluule — küsimus. Luu kuumutati tulel, kuni see pragunes, ja pragu loeti vastuseks.</p>
           <p>Lääne tähestik sündis arvepidamisest: mitu amforat, mitu lammast, kellele võlgu. Hiina kiri sündis selleks, et küsida tulevikult. <strong>Üks luges varandust. Teine luges saatust.</strong></p>
         </div>
       </article>
@@ -427,7 +435,7 @@
           <span class="pillar__n">Teine</span>
           <h3>Kahendmuster oli olemas tuhat aastat enne Euroopat.</h3>
           <p><em>Yijing</em> — Muutuste raamat — on ehitatud kahest joonest. Katkenud ja terve. Ei ja jah. Kuus joont annavad kuuskümmend neli mustrit, kuuskümmend neli maailma olekut.</p>
-          <p>Üheteistkümnendal sajandil järjestas õpetlane Shao Yong need kindlasse ritta. Pane katkenud joone asemele null, terve joone asemele üks — ja rida loeb täpselt nullist kuuekümne kolmeni. <strong>Sama kahetine loogika — null ja üks, katkenud ja terve — millele Lääs hiljem ehitas masinate maailma.</strong> Sajandeid enne kui keegi seda masinakeeleks nimetada oskas.</p>
+          <p>Üheteistkümnendal sajandil järjestas õpetlane Shao Yong need kindlasse ritta. Pane katkenud joone asemele null, terve joone asemele üks — ja rida loeb täpselt nullist kuuekümne kolmeni. <strong>Sama kahetine loogika — null ja üks, katkenud ja terve — millele Lääs hiljem ehitas masinate maailma.</strong> Sajandeid enne, kui keegi oskas seda masinakeeleks nimetada.</p>
         </div>
       </article>
 
@@ -436,7 +444,7 @@
         <div>
           <span class="pillar__n">Kolmas</span>
           <h3>Lääne arvuti süütas oma esimese küünla sellelt oraaklilt.</h3>
-          <p>Aastal 1701 saatis jesuiit Joachim Bouvet Pekingist Euroopasse kirja. Saajaks Gottfried Wilhelm Leibniz — mees, kes oli äsja välja töötanud kahendarvustiku, masinaloogika, millele kogu hilisem arvutimaailm rajaneb. Kirjas oli Hiina heksagrammide skeem. Leibniz vaatas seda ja nägi seal oma süsteemi.</p>
+          <p>Aastal 1701 saatis jesuiit Joachim Bouvet Pekingist Euroopasse kirja. Saajaks oli Gottfried Wilhelm Leibniz — mees, kes oli äsja välja töötanud kahendarvustiku, masinaloogika, millele rajaneb kogu hilisem arvutimaailm. Kirjas oli Hiina heksagrammide skeem. Leibniz vaatas seda ja nägi seal oma süsteemi.</p>
           <p>Ja siin on koht, kus enamik jutuvestjaid valetab. Leibniz <strong>ei õppinud</strong> kahendkoodi <em>Yijingist</em>. Ta leidis selle sealt juba ootamas. Ta tõi oma võtme ja avastas, et lukk oli Hiinas ammu valatud. Kaks tsivilisatsiooni jõudsid sama koodini — üks nimetas seda masinaks, teine oraakliks.</p>
         </div>
       </article>
@@ -456,8 +464,8 @@
   <section class="block reveal">
     <p class="eyebrow">IV — Lävi</p>
     <p class="dim">Sellest diagnoosist ei minda läbi lugemisega. See ei mahu artiklisse ega postitusse. Ta nõuab läbiminekut.</p>
-    <p class="lead">On olemas ring. Tema nime sa siit ei loe — kes peab teadma, see saab teada. Sees ei loe sa postitusi. Sa läbid kolme astet, mis on samad kolm sammast, mille just lugesid: õppida esitama küsimust, mida kardad; õppida lugema oma praegust olekut kuuekümne nelja seast; õppida nägema seda, mille suhtes Lääs on pime.</p>
-    <p class="dim">Ja kui sa kolmandast väljud, on pimedus võetud. Sa ei näe rohkem tulevikku kui enne. Sa lihtsalt ei usu enam, et nägid.</p>
+    <p class="lead">On olemas ring. Selle nime sa siit ei loe — kes peab teadma, see saab teada. Sees ei loe sa postitusi. Sa läbid kolm astet, mis on samad kolm sammast, mida just lugesid: õppida esitama küsimust, mida kardad; õppida lugema oma praegust olekut kuuekümne nelja seast; õppida nägema seda, mille suhtes Lääs on pime.</p>
+    <p class="dim">Ja kui sa kolmandast väljud, on pimedus võetud. Sa ei näe tulevikku rohkem kui enne. Sa lihtsalt ei usu enam, et nägid.</p>
   </section>
 
   <!-- THE GATE -->
@@ -499,7 +507,7 @@
   </section>
 
   <footer>
-    <span>Pragu · Steven Alber</span>
+    <span>Pragu</span>
     <span>Tulevikupimedus · I luu</span>
   </footer>
 
