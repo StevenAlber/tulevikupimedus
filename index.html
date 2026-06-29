@@ -297,6 +297,29 @@
     border-color:var(--ember-deep);
     box-shadow:0 0 0 1px var(--ember-deep),0 0 30px rgba(203,126,54,.12);
   }
+  .door__count{
+    margin:.6rem 0 0;text-align:right;
+    font-family:"JetBrains Mono",monospace;
+    font-size:.68rem;letter-spacing:.08em;color:var(--ash);
+  }
+  .door__count.over span{color:var(--ember-hot);}
+  input#email{
+    width:100%;margin-top:1.1rem;
+    background:var(--char-2);
+    border:1px solid var(--line);
+    border-radius:0;
+    color:var(--bone);
+    font-family:"Spectral",serif;
+    font-size:1.02rem;
+    padding:.95rem 1.3rem;
+    transition:border-color .3s ease, box-shadow .3s ease;
+  }
+  input#email::placeholder{color:var(--ash);font-style:italic;}
+  input#email:focus{
+    outline:none;
+    border-color:var(--ember-deep);
+    box-shadow:0 0 0 1px var(--ember-deep),0 0 30px rgba(203,126,54,.12);
+  }
   .door__row{
     margin-top:1.4rem;
     display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;
@@ -490,19 +513,20 @@
     <!-- DOOR -->
     <div class="door" id="door">
       <p class="door__label">Raiu välja oma küsimus</p>
-      <textarea id="question" rows="4" placeholder="See, mida sa kardad valjusti küsida…" aria-label="Sinu küsimus"></textarea>
+      <textarea id="question" rows="5" maxlength="5000" placeholder="See, mida sa kardad valjusti küsida…" aria-label="Sinu küsimus"></textarea>
+      <p class="door__count"><span id="count">0</span> / 5000</p>
+      <input id="email" type="email" inputmode="email" autocomplete="email" placeholder="kuhu vastus tuleb, kui lävi avaneb" aria-label="Sinu e-post">
       <div class="door__row">
         <button id="send" type="button">Saada küsimus</button>
         <span class="door__note" id="note">Üks küsimus. Pöördumatu.</span>
       </div>
-      <p class="door__privacy">Sinu küsimust ei avaldata ega kasutata sinu loata. Kui see avab esimese ringi, saad vastuse e-postiga.</p>
+      <p class="door__privacy">Sinu küsimust ja e-posti ei avaldata ega kasutata sinu loata. Kui küsimus avab esimese ringi, saad vastuse e-postiga.</p>
     </div>
 
     <!-- SEALED STATE -->
     <div class="sealed" id="sealed" aria-live="polite">
       <div class="sealed__mark" aria-hidden="true">卜</div>
-      <p>Su kiri on valmis. Saada see teele — siis on küsimus raiutud luusse.</p>
-      <p class="sealed__alt">Kui postiprogramm ei avanenud, kirjuta otse: <a href="mailto:pragu@tulevikupimedus.com">pragu@tulevikupimedus.com</a></p>
+      <p>Küsimus on raiutud luusse. Kui lävi avaneb, saad vastuse e-postiga.</p>
     </div>
   </section>
 
@@ -552,32 +576,74 @@
     window.addEventListener('scroll', showAll, {passive:true, once:true});
   }
 
-  // the door — send one question
-  // NB: asenda allolev aadress oma Pragu postkastiga
-  var PRAGU_EMAIL = "pragu@tulevikupimedus.com";
+  // the door — send one question to the Pragu worker
+  // NB: asenda see oma Workeri aadressiga (xxx.workers.dev), kui see on deployitud
+  var WORKER_URL = "https://PRAGU-WORKER.SINU-KONTO.workers.dev";
+  var FALLBACK_EMAIL = "pragu@tulevikupimedus.com";
+  var MIN_LEN = 15, MAX_LEN = 5000;
 
   var q = document.getElementById('question');
+  var email = document.getElementById('email');
   var send = document.getElementById('send');
   var note = document.getElementById('note');
   var door = document.getElementById('door');
   var sealed = document.getElementById('sealed');
+  var count = document.getElementById('count');
+  var countWrap = count ? count.parentNode : null;
+
+  function isEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s); }
+  function setNote(msg, warn){
+    note.textContent = msg;
+    if(warn){ note.classList.add('warn'); } else { note.classList.remove('warn'); }
+  }
+
+  // märgiloendur
+  if(q && count){
+    var upd = function(){
+      var n = q.value.length;
+      count.textContent = n;
+      if(countWrap){ countWrap.classList.toggle('over', n > MAX_LEN - 200); }
+    };
+    q.addEventListener('input', upd);
+    upd();
+  }
 
   send.addEventListener('click', function(){
     var text = (q.value || '').trim();
-    if(text.length < 8){
-      note.textContent = 'Raiu välja päris küsimus.';
-      note.classList.add('warn');
-      q.focus();
-      return;
+    var addr = (email.value || '').trim();
+
+    if(text.length < MIN_LEN){
+      setNote('Raiu välja päris küsimus.', true); q.focus(); return;
     }
-    note.classList.remove('warn');
-    var subject = encodeURIComponent('Pragu — küsimus');
-    var body = encodeURIComponent(text);
-    // ava kasutaja postkast küsimusega
-    window.location.href = 'mailto:' + PRAGU_EMAIL + '?subject=' + subject + '&body=' + body;
-    // sulge uks ja näita pitserit
-    door.style.display = 'none';
-    sealed.classList.add('show');
+    if(text.length > MAX_LEN){
+      setNote('Küsimus on liiga pikk.', true); q.focus(); return;
+    }
+    if(!isEmail(addr)){
+      setNote('Lisa e-post, kuhu vastus tuleb.', true); email.focus(); return;
+    }
+
+    setNote('Saadan…', false);
+    send.disabled = true;
+
+    fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: text, email: addr })
+    })
+    .then(function(r){ return r.ok; })
+    .then(function(ok){
+      if(ok){
+        door.style.display = 'none';
+        sealed.classList.add('show');
+        sealed.scrollIntoView({behavior:'smooth', block:'center'});
+      } else {
+        throw new Error('fail');
+      }
+    })
+    .catch(function(){
+      send.disabled = false;
+      setNote('Saatmine ebaõnnestus. Proovi uuesti või kirjuta ' + FALLBACK_EMAIL, true);
+    });
   });
 })();
 </script>
