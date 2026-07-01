@@ -345,6 +345,14 @@
     font-size:.72rem;letter-spacing:.05em;color:var(--ash);
   }
   .door__note.warn{color:var(--ember-hot);}
+  .gate__count{
+    font-family:"JetBrains Mono",monospace;
+    font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;
+    color:var(--ember);
+    margin:1.6rem 0 0;
+    min-height:1em;
+    opacity:.85;
+  }
   .door__privacy{
     margin-top:1.6rem;
     font-size:.82rem;line-height:1.6;color:var(--ash);
@@ -530,6 +538,8 @@
       <span>//</span> Kes tahab läbi minna, saadab küsimuse.
     </div>
 
+    <p class="gate__count" id="gateCount" aria-live="polite"></p>
+
     <!-- DOOR -->
     <div class="door" id="door">
       <p class="door__label">Raiu välja oma küsimus</p>
@@ -612,6 +622,27 @@
   var count = document.getElementById('count');
   var countWrap = count ? count.parentNode : null;
 
+  // live loendur — mitu kohta sajast on veel vaba
+  function loadCount(){
+    var el = document.getElementById('gateCount');
+    if(!el) return;
+    fetch(WORKER_URL, { method:'GET' })
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(data){
+        if(data && typeof data.count === 'number'){
+          var slots = data.slots || 100;
+          var left = Math.max(0, slots - data.count);
+          if(left <= 0){
+            el.textContent = 'Pragu on suletud. Sada kohta on täidetud.';
+          } else {
+            el.textContent = left + ' / ' + slots + ' kohta veel vaba.';
+          }
+        }
+      })
+      .catch(function(){ /* vaikne ebaõnnestumine — leht töötab loendurita edasi */ });
+  }
+  loadCount();
+
   function isEmail(s){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s); }
   function setNote(msg, warn){
     note.textContent = msg;
@@ -657,6 +688,7 @@
         door.style.display = 'none';
         sealed.classList.add('show');
         sealed.scrollIntoView({behavior:'smooth', block:'center'});
+        loadCount();
       } else {
         throw new Error('fail');
       }
