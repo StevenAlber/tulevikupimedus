@@ -87,33 +87,33 @@
   /* ---- the crack: a fixed left rail, read top to bottom ---- */
   .crack{
     position:fixed;
-    top:0;left:max(24px,4.2vw);
-    width:14px;height:100vh;
+    top:0;left:max(8px,2.3vw);
+    width:16px;height:100vh;
     z-index:5;
     pointer-events:none;
   }
   .crack svg{width:100%;height:100%;display:block;overflow:visible;}
   .crack path{
     fill:none;
-    stroke:var(--cinnabar);
-    stroke-width:1.1;
-    opacity:.4;
+    stroke:var(--cinnabar-deep);
+    stroke-width:2.2;
+    opacity:.68;
     vector-effect:non-scaling-stroke;
   }
   .crack__heat{
     position:absolute;
-    left:5px;width:4px;
+    left:5px;width:6px;
     top:calc(var(--heat) * 100%);
     height:14vh;transform:translateY(-50%);
     background:linear-gradient(to bottom, transparent, var(--cinnabar-hot), transparent);
-    opacity:.85;
+    opacity:.9;
   }
   .crack__read{
     position:absolute;left:4px;
     top:calc(var(--heat) * 100%);
-    width:6px;height:6px;border-radius:50%;
-    background:var(--cinnabar);
-    box-shadow:0 0 0 3px rgba(166,56,42,.18);
+    width:8px;height:8px;border-radius:50%;
+    background:var(--cinnabar-deep);
+    box-shadow:0 0 0 4px rgba(110,32,24,.2);
     transform:translateY(-50%);
   }
 
@@ -443,26 +443,27 @@
     z-index:0;
   }
   .wm--hero{
-    right:-14%;top:-8%;
-    width:clamp(360px,54vw,680px);
-    opacity:.11;
+    right:-10%;top:-6%;
+    width:clamp(380px,56vw,680px);
+    opacity:.3;
   }
-  .wm--hero .wm-rays line{stroke:var(--ink);stroke-width:1.6;}
-  .wm--hero .wm-lid{fill:none;stroke:var(--ink);stroke-width:2.2;}
-  .wm--hero .wm-iris{fill:none;stroke:var(--ink);stroke-width:1.6;}
-  .wm--hero .wm-crack{fill:none;stroke:var(--cinnabar);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;}
+  .wm--hero .wm-rays line{stroke:var(--ink);stroke-width:2.4;}
+  .wm--hero .wm-lid{fill:none;stroke:var(--ink);stroke-width:4;}
+  .wm--hero .wm-iris{fill:none;stroke:var(--ink);stroke-width:2.6;}
+  .wm--hero .wm-crack{fill:none;stroke:var(--cinnabar-deep);stroke-width:5.5;stroke-linecap:round;stroke-linejoin:round;}
   .wm--bone{
-    right:-10%;top:8%;
-    width:clamp(200px,34vw,320px);
-    opacity:.09;
+    right:-6%;top:8%;
+    width:clamp(220px,36vw,340px);
+    opacity:.26;
   }
-  .wm--bone path{fill:none;stroke:var(--ink-dim);stroke-width:1.6;}
+  .wm--bone path{fill:none;stroke:var(--ink-dim);stroke-width:2.6;}
+  .wm--bone line{stroke:var(--ink-dim);stroke-width:2.6;}
   .wm--yijing{
-    right:-8%;bottom:-14%;
-    width:clamp(180px,30vw,280px);
-    opacity:.09;
+    right:-4%;bottom:-10%;
+    width:clamp(200px,32vw,300px);
+    opacity:.26;
   }
-  .wm--yijing path{fill:none;stroke:var(--cinnabar-deep);stroke-width:1.4;}
+  .wm--yijing path{fill:none;stroke:var(--cinnabar-deep);stroke-width:2.4;}
   .wm--yijing rect{fill:var(--cinnabar-deep);}
 
   /* ---- reveal on scroll (peidetud ainult kui JS töötab) ---- */
@@ -474,13 +475,12 @@
 
   /* ---- responsive ---- */
   @media (max-width:640px){
-    .crack{left:14px;}
     .pillar{grid-template-columns:1fr;gap:1rem;}
     .pillar__mark{font-size:2.6rem;}
     footer{flex-direction:column;}
-    .wm--hero{width:260px;right:-24%;top:-6%;}
-    .wm--bone{width:150px;opacity:.07;}
-    .wm--yijing{width:130px;opacity:.07;}
+    .wm--hero{width:280px;right:-16%;top:-4%;}
+    .wm--bone{width:170px;opacity:.22;}
+    .wm--yijing{width:150px;opacity:.22;}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -494,8 +494,8 @@
 <body>
 
 <div class="crack" aria-hidden="true">
-  <svg viewBox="0 0 14 1000" preserveAspectRatio="none">
-    <path d="M7,0 L5,55 L9,95 L4,150 L8,210 L6,260 L10,310 L5,370 L7,430 L4,480 L9,540 L6,600 L8,660 L5,710 L7,770 L4,820 L9,870 L6,920 L8,960 L7,1000"/>
+  <svg viewBox="0 0 16 1000" preserveAspectRatio="none">
+    <path d="M8,0 L3,55 L13,95 L2,150 L12,210 L5,260 L14,310 L3,370 L11,430 L2,480 L13,540 L5,600 L12,660 L3,710 L11,770 L2,820 L14,870 L4,920 L11,960 L8,1000"/>
   </svg>
   <div class="crack__heat"></div>
   <div class="crack__read"></div>
