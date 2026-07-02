@@ -87,26 +87,29 @@
   /* ---- the crack: a fixed left rail, read top to bottom ---- */
   .crack{
     position:fixed;
-    top:0;left:max(28px,4.5vw);
-    width:1px;height:100vh;
-    background:linear-gradient(to bottom,
-      transparent 0,
-      rgba(166,56,42,.28) 8%,
-      rgba(166,56,42,.28) 92%,
-      transparent 100%);
+    top:0;left:max(24px,4.2vw);
+    width:14px;height:100vh;
     z-index:5;
     pointer-events:none;
   }
+  .crack svg{width:100%;height:100%;display:block;overflow:visible;}
+  .crack path{
+    fill:none;
+    stroke:var(--cinnabar);
+    stroke-width:1.1;
+    opacity:.4;
+    vector-effect:non-scaling-stroke;
+  }
   .crack__heat{
     position:absolute;
-    left:-1px;width:3px;
+    left:5px;width:4px;
     top:calc(var(--heat) * 100%);
     height:14vh;transform:translateY(-50%);
     background:linear-gradient(to bottom, transparent, var(--cinnabar-hot), transparent);
     opacity:.85;
   }
   .crack__read{
-    position:absolute;left:-2.5px;
+    position:absolute;left:4px;
     top:calc(var(--heat) * 100%);
     width:6px;height:6px;border-radius:50%;
     background:var(--cinnabar);
@@ -235,6 +238,8 @@
     grid-template-columns:88px 1fr;
     gap:1.8rem;
     align-items:start;
+    position:relative;
+    overflow:hidden;
   }
   .pillar__mark{
     font-family:"Noto Serif SC",serif;
@@ -438,32 +443,26 @@
     z-index:0;
   }
   .wm--hero{
-    right:-14%;top:-8%;
-    font-family:"Noto Serif SC",serif;
-    font-size:clamp(18rem,52vw,40rem);
-    line-height:1;
-    color:var(--ink);
-    opacity:.045;
+    right:-16%;top:-10%;
+    width:clamp(320px,50vw,620px);
+    opacity:.05;
   }
-  .wm--hex{
-    right:-7%;top:6%;
-    width:clamp(200px,32vw,320px);
-    opacity:.075;
+  .wm--hero circle{fill:none;stroke:var(--ink);stroke-width:1.4;}
+  .wm--hero line{stroke:var(--ink);}
+  .wm--hero path{fill:none;stroke:var(--cinnabar);}
+  .wm--bone{
+    right:-10%;top:8%;
+    width:clamp(200px,34vw,320px);
+    opacity:.09;
   }
-  .wm--hex rect{fill:var(--ink);}
-  .wm--crack{
-    left:-12%;bottom:-10%;
-    width:clamp(260px,44vw,440px);
-    opacity:.08;
+  .wm--bone path{fill:none;stroke:var(--ink-dim);stroke-width:1.6;}
+  .wm--yijing{
+    right:-8%;bottom:-14%;
+    width:clamp(180px,30vw,280px);
+    opacity:.09;
   }
-  .wm--crack path{fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;}
-  .wm--seal{
-    right:-9%;top:2%;
-    width:clamp(220px,38vw,360px);
-    opacity:.1;
-  }
-  .wm--seal circle{fill:none;stroke:var(--cinnabar);stroke-width:2;}
-  .wm--seal text{fill:var(--cinnabar);}
+  .wm--yijing path{fill:none;stroke:var(--cinnabar-deep);stroke-width:1.4;}
+  .wm--yijing rect{fill:var(--cinnabar-deep);}
 
   /* ---- reveal on scroll (peidetud ainult kui JS töötab) ---- */
   .js .reveal{opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s ease;}
@@ -478,10 +477,9 @@
     .pillar{grid-template-columns:1fr;gap:1rem;}
     .pillar__mark{font-size:2.6rem;}
     footer{flex-direction:column;}
-    .wm--hero{font-size:14rem;right:-22%;top:-4%;}
-    .wm--hex{width:160px;opacity:.06;}
-    .wm--crack{width:210px;opacity:.07;}
-    .wm--seal{width:200px;opacity:.09;}
+    .wm--hero{width:260px;right:-24%;top:-6%;}
+    .wm--bone{width:150px;opacity:.07;}
+    .wm--yijing{width:130px;opacity:.07;}
   }
 
   @media (prefers-reduced-motion:reduce){
@@ -495,6 +493,9 @@
 <body>
 
 <div class="crack" aria-hidden="true">
+  <svg viewBox="0 0 14 1000" preserveAspectRatio="none">
+    <path d="M7,0 L5,55 L9,95 L4,150 L8,210 L6,260 L10,310 L5,370 L7,430 L4,480 L9,540 L6,600 L8,660 L5,710 L7,770 L4,820 L9,870 L6,920 L8,960 L7,1000"/>
+  </svg>
   <div class="crack__heat"></div>
   <div class="crack__read"></div>
 </div>
@@ -503,7 +504,24 @@
 
   <!-- HERO -->
   <header class="hero">
-    <div class="wm wm--hero" aria-hidden="true">卜</div>
+    <svg class="wm wm--hero" aria-hidden="true" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="200" cy="200" r="150"/>
+      <g stroke-width="2">
+        <line x1="200" y1="30" x2="200" y2="50" transform="rotate(0 200 200)"/>
+        <line x1="200" y1="30" x2="200" y2="50" transform="rotate(30 200 200)"/>
+        <line x1="200" y1="30" x2="200" y2="50" transform="rotate(60 200 200)"/>
+        <line x1="200" y1="30" x2="200" y2="50" transform="rotate(90 200 200)"/>
+        <line x1="200" y1="30" x2="200" y2="50" transform="rotate(120 200 200)"/>
+        <line x1="200" y1="30" x2="200" y2="50" transform="rotate(150 200 200)"/>
+        <line x1="200" y1="30" x2="200" y2="50" transform="rotate(180 200 200)"/>
+        <line x1="200" y1="30" x2="200" y2="50" transform="rotate(210 200 200)"/>
+        <line x1="200" y1="30" x2="200" y2="50" transform="rotate(240 200 200)"/>
+        <line x1="200" y1="30" x2="200" y2="50" transform="rotate(270 200 200)"/>
+        <line x1="200" y1="30" x2="200" y2="50" transform="rotate(300 200 200)"/>
+        <line x1="200" y1="30" x2="200" y2="50" transform="rotate(330 200 200)"/>
+      </g>
+      <path d="M70,300 L165,215 L145,150 L260,95" stroke-width="2.4"/>
+    </svg>
     <div class="hero__mark" aria-hidden="true">卜</div>
     <p class="eyebrow eyebrow--ember">Tulevikupimedus</p>
     <h1>Tuleviku<wbr>pimedus</h1>
@@ -527,20 +545,19 @@
 
   <!-- II. KOLM ASJA -->
   <section class="block reveal">
-    <svg class="wm wm--hex" aria-hidden="true" viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
-      <rect x="0"   y="0"   width="200" height="30"/>
-      <rect x="0"   y="50"  width="85"  height="30"/><rect x="115" y="50"  width="85" height="30"/>
-      <rect x="0"   y="100" width="200" height="30"/>
-      <rect x="0"   y="150" width="85"  height="30"/><rect x="115" y="150" width="85" height="30"/>
-      <rect x="0"   y="200" width="200" height="30"/>
-      <rect x="0"   y="250" width="85"  height="30"/><rect x="115" y="250" width="85" height="30"/>
-    </svg>
     <p class="eyebrow">II — Kolm asja, mida sulle ei õpetatud</p>
     <p class="dim">Ma ei jõudnud selle mõtteni raamatukogus. See hakkas mulle sisse tulema alles siis, kui nägin, kuidas vana Hiina märgikeel ja uus masinatsivilisatsioon seisavad kõrvuti — ega vaidle omavahel üldse. Ainult Lääs naerab. Ja just see naer reetis pimeduse.</p>
     <p class="lead">Legend, mida ma sulle räägin, ei ole väljamõeldis. Igaüks võib selle üle kontrollida. Just see teebki selle talumatuks.</p>
 
     <div class="pillars">
       <article class="pillar">
+        <svg class="wm wm--bone" aria-hidden="true" viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20,110 Q45,25 160,18 Q275,25 300,110 Q275,195 160,202 Q45,195 20,110 Z"/>
+          <path d="M70,75 L150,120 L128,165 L215,145" stroke-width="1.6"/>
+          <line x1="90" y1="55" x2="105" y2="60"/>
+          <line x1="200" y1="60" x2="212" y2="52"/>
+          <line x1="230" y1="130" x2="245" y2="120"/>
+        </svg>
         <div class="pillar__mark" aria-hidden="true">卜</div>
         <div>
           <span class="pillar__n">Esimene</span>
@@ -551,6 +568,18 @@
       </article>
 
       <article class="pillar">
+        <svg class="wm wm--yijing" aria-hidden="true" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <path d="M191,37.2 A120,120 0 1 1 109,37.2"/>
+          <g>
+            <rect x="226.9" y="57.1" width="16" height="3"/><rect x="226.9" y="63.1" width="16" height="3"/><rect x="226.9" y="69.1" width="16" height="3"/>
+            <rect x="262" y="142" width="16" height="3"/><rect x="262" y="148" width="7" height="3"/><rect x="271" y="148" width="7" height="3"/><rect x="262" y="154" width="16" height="3"/>
+            <rect x="226.9" y="226.9" width="7" height="3"/><rect x="235.9" y="226.9" width="7" height="3"/><rect x="226.9" y="232.9" width="16" height="3"/><rect x="226.9" y="238.9" width="16" height="3"/>
+            <rect x="142" y="262" width="16" height="3"/><rect x="142" y="268" width="16" height="3"/><rect x="142" y="274" width="7" height="3"/><rect x="151" y="274" width="7" height="3"/>
+            <rect x="57.1" y="226.9" width="7" height="3"/><rect x="66.1" y="226.9" width="7" height="3"/><rect x="57.1" y="232.9" width="7" height="3"/><rect x="66.1" y="232.9" width="7" height="3"/><rect x="57.1" y="238.9" width="16" height="3"/>
+            <rect x="22" y="142" width="16" height="3"/><rect x="22" y="148" width="16" height="3"/><rect x="22" y="154" width="16" height="3"/>
+            <rect x="57.1" y="57.1" width="16" height="3"/><rect x="57.1" y="63.1" width="7" height="3"/><rect x="66.1" y="63.1" width="7" height="3"/><rect x="57.1" y="69.1" width="16" height="3"/>
+          </g>
+        </svg>
         <div class="pillar__mark" aria-hidden="true">蒙</div>
         <div>
           <span class="pillar__n">Teine</span>
@@ -574,12 +603,6 @@
 
   <!-- III. PÖÖRE -->
   <section class="block reveal">
-    <svg class="wm wm--crack" aria-hidden="true" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20,10 L90,80 L70,150 L140,210 L120,290"/>
-      <path d="M90,80 L160,60"/>
-      <path d="M70,150 L20,190"/>
-      <path d="M140,210 L210,240"/>
-    </svg>
     <p class="eyebrow">III — Pööre</p>
     <p class="dim">Pane need kolm kõrvuti. Hiina vanim säilinud kiri oli tuleviku küsimus. Hiina raamat kandis kahendmustrit tuhat aastat ette. Lääne arvuti sai oma sädeme sellelt mustrilt.</p>
     <p class="lead">Ja siis nimetas Lääs juure, millest ta ise kasvas, ebausuks.</p>
@@ -597,11 +620,6 @@
 
   <!-- THE GATE -->
   <section class="gate reveal" id="varav">
-    <svg class="wm wm--seal" aria-hidden="true" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="100" cy="100" r="92"/>
-      <circle cx="100" cy="100" r="78"/>
-      <text x="100" y="122" font-size="64" text-anchor="middle" font-family="Noto Serif SC, serif">卜</text>
-    </svg>
     <p class="eyebrow eyebrow--ember">Värav</p>
     <p class="gate__sigil">PRAGU</p>
     <p class="gate__sub">suletud ring neile, kes tahavad pimedusest läbi minna</p>
